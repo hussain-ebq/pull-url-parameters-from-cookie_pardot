@@ -1,0 +1,44 @@
+<!-- Calls cookie.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+
+<!-- Retrieve URL Parameters from Cookie -->
+<script type="text/javascript">
+// Parse the URL Parameter from the passed URL
+function getParameterByName(name, url) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+//Assign the URL Parameters to their respective variables
+var url = Cookies.get('__gtm_url_with_params');
+var source = getParameterByName('utm_source', url);
+var medium = getParameterByName('utm_medium', url);
+var campaign = getParameterByName('utm_campaign', url);
+var content = getParameterByName('utm_content', url);
+var term = getParameterByName('utm_term', url);
+var gclid = getParameterByName('gclid', url);
+
+//Find the hidden Pardot fields and assign the URL parameter values to their respective field
+if (document.querySelector(".utm_source") != null){
+  document.querySelector(".utm_source input").value = source;
+}
+if (document.querySelector(".utm_medium") != null){
+  document.querySelector(".utm_medium input").value = medium;
+}
+if (document.querySelector(".utm_campaign") != null){
+  document.querySelector(".utm_campaign input").value = campaign;
+}
+if (document.querySelector(".utm_content") != null){
+  document.querySelector(".utm_content input").value = content;
+}
+if (document.querySelector(".utm_term") != null){
+  document.querySelector(".utm_term input").value = term;
+}
+if (document.querySelector(".GCLID") != null){
+  document.querySelector(".GCLID input").value = gclid;
+}
+
+</script>
